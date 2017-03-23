@@ -1,0 +1,13 @@
+{
+    "name": "shibby/mesnot-laravel",
+    "description": "Message notification comminicator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guven Atbakan",
+            "email": "guvenatbakan@gmail.com"
+        }
+    ],
+    "require": {}
+}
