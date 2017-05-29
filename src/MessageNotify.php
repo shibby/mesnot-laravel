@@ -33,7 +33,9 @@ class MessageNotify
         if (!$user instanceof $userClass) {
             $anonKey = $user;
         }
-        $result = $this->sendRequest('POST', 'events/request/'.$eventKey, [
+        $parameters = $this->mergeDefaultParameters($parameters);
+
+        $this->sendRequest('POST', 'events/request/'.$eventKey, [
             'parameters' => $parameters,
             'clientReferenceId' => $user->id ?? null,
             'anonReferenceId' => $anonKey ?? null,
@@ -54,5 +56,17 @@ class MessageNotify
     private function getUserFields()
     {
         return config('mesnot.user.fields');
+    }
+
+    private function mergeDefaultParameters($parameters)
+    {
+        if(!is_array($parameters)){
+            $parameters = [];
+        }
+
+        return array_merge([
+            'app_url' => config('app.url'),
+            'app_env' => config('app.env'),
+        ], $parameters);
     }
 }
