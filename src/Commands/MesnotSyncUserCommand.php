@@ -2,9 +2,8 @@
 
 namespace Shibby\Mesnot\Commands;
 
-use App\Model\User;
 use Illuminate\Console\Command;
-use Shibby\Mesnot\MessageNotify;
+use Shibby\Mesnot\MesnotClient;
 
 class MesnotSyncUserCommand extends Command
 {
@@ -24,8 +23,6 @@ class MesnotSyncUserCommand extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -39,12 +36,14 @@ class MesnotSyncUserCommand extends Command
      */
     public function handle()
     {
-        /** @var MessageNotify $messageNotify */
-        $messageNotify = app(MessageNotify::class);
+        /** @var MesnotClient $mesnotClient */
+        $mesnotClient = app(MesnotClient::class);
 
-        $users = User::all();
+        $userClass = config('mesnot.user.class');
+
+        $users = $userClass::all();
         foreach ($users as $user) {
-            $messageNotify->updateClient($user);
+            $mesnotClient->updateClient($user);
         }
     }
 }

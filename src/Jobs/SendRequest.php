@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Shibby\Mesnot\Jobs;
 
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
 class SendRequest implements ShouldQueue
 {
@@ -56,7 +54,10 @@ class SendRequest implements ShouldQueue
             return $response->getBody()->getContents();
         } catch (\Exception $exception) {
             \Log::debug('Request failed to mesnot');
-            \Sentry::captureException($exception);
+            if (app()->bound('sentry')) {
+                \Sentry::captureException($exception);
+            }
+
             return false;
         }
     }

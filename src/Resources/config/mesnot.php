@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'appId' => '',
-    'appKey' => '',
+    'appId' => config('MESNOT_APPID'),
+    'appKey' => config('MESNOT_APPKEY'),
     'user' => [
         'class' => \App\Model\User::class,
         'fields' => [

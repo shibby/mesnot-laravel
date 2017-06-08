@@ -1,6 +1,6 @@
 {
     "name": "shibby/mesnot-laravel",
-    "description": "Message notification comminicator",
+    "description": "Message notification communicator",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -10,11 +10,16 @@
         }
     ],
     "require": {
+        "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.2"
     },
     "autoload": {
         "psr-4": {
             "Shibby\\Mesnot\\": "src/"
         }
-    }
+    },
+    "require-dev": {
+        "laravel/framework": "^5.4"
+    },
+    "prefer-stable": true
 }
