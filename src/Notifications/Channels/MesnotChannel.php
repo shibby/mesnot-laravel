@@ -2,6 +2,7 @@
 
 namespace Shibby\Mesnot\Notifications\Channels;
 
+use Illuminate\Notifications\Notification;
 use Shibby\Mesnot\MesnotClient;
 use Shibby\Mesnot\MesnotMessage;
 
