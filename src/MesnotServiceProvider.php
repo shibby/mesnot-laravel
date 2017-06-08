@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Shibby\Mesnot;
 
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +14,7 @@ class MesnotServiceProvider extends ServiceProvider
         ]);
         if ($this->app->runningInConsole()) {
             $this->commands([
-                MesnotSyncUserCommand::class
+                MesnotSyncUserCommand::class,
             ]);
         }
     }
