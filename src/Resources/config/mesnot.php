@@ -12,4 +12,5 @@ return [
             'name' => 'name',
         ],
     ],
+    'isSandbox' => 0,
 ];

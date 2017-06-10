@@ -37,6 +37,7 @@ class MesnotClient
             'parameters' => $parameters,
             'clientReferenceId' => $user->id ?? null,
             'anonReferenceId' => $anonKey ?? null,
+            'isSandbox' => config('mesnot.isSandbox', 0)
         ]);
     }
 
