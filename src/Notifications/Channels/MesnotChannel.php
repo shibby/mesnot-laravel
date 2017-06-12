@@ -24,7 +24,7 @@ class MesnotChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!method_exists($notifiable, 'toMesnot')) {
+        if (!method_exists($notification, 'toMesnot')) {
             return;
         }
 
