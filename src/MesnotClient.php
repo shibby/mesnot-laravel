@@ -17,7 +17,11 @@ class MesnotClient
         if (!$user instanceof $userClass) {
             return;
         }
-        $this->sendRequest('PUT', 'client/'.$user->id, [
+        $clientKey = $user->id;
+        if(config('mesnot.isSandbox')){
+            $clientKey .= '_sandbox';
+        }
+        $this->sendRequest('PUT', 'client/'.$clientKey, [
             'name' => !empty($userFields['name']) ? $user->{$userFields['name']} : null,
             'email' => !empty($userFields['email']) ? $user->{$userFields['email']} : null,
             'username' => !empty($userFields['username']) ? $user->{$userFields['username']} : null,
@@ -33,11 +37,18 @@ class MesnotClient
         }
         $parameters = $this->mergeDefaultParameters($parameters);
 
+        $clientKey = null;
+        if($user){
+            $clientKey = $user->id;
+            if(config('mesnot.isSandbox')){
+                $clientKey .= '_sandbox';
+            }
+        }
         $this->sendRequest('POST', 'events/request/'.$eventKey, [
             'parameters' => $parameters,
-            'clientReferenceId' => $user->id ?? null,
+            'clientReferenceId' => $clientKey,
             'anonReferenceId' => $anonKey ?? null,
-            'isSandbox' => config('mesnot.isSandbox', 0)
+            'isSandbox' => config('mesnot.isSandbox')
         ]);
     }
 
